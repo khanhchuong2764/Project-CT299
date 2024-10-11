@@ -44,7 +44,42 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-bars"></i>
+            {{-- <i class="nav-icon fas fa-bars"></i> --}}
+            <i class="nav-icon fa-regular fa-newspaper"></i>
+            <p>
+              Bài Viết
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admin/article/create" class="nav-link">
+                <p>Thêm bài viết</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/article" class="nav-link">
+                <p>Danh sách</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/category-article/create" class="nav-link">
+                <p>Thêm danh mục</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/category-article" class="nav-link">
+                <p>Danh mục</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            {{-- <i class="nav-icon fas fa-bars"></i> --}}
+            <i class="nav-icon fa-solid fa-box-open"></i>
             <p>
               Sản Phẩm
               <i class="right fas fa-angle-left"></i>
@@ -53,12 +88,22 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="/admin/product/create" class="nav-link">
-                <p>Thêm Mới Sản Phẩm</p>
+                <p>Thêm sản phẩm</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="/admin/product" class="nav-link">
-                <p>Danh Sách Sản Phẩm</p>
+                <p>Danh sách sản phẩm</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/category/create" class="nav-link">
+                <p>Thêm danh mục</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/category" class="nav-link">
+                <p>Danh Mục</p>
               </a>
             </li>
           </ul>

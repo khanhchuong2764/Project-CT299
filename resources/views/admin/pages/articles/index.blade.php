@@ -3,7 +3,7 @@
 
 @section('content')
     @include('admin/mixins/alert')
-    <div class="card mb-3">
+     <div class="card mb-3">
         <div class="card-header">Bộ lọc và Tìm kiếm
             <div class="card-body">
                 <div class="row">
@@ -31,7 +31,7 @@
             <div class= 'card-body'>
                 <div class="row">
                     <div class="col-8">
-                        <form action="/admin/product/changeMulti" method="post" form-changed-multi>
+                        <form action="/admin/article/changeMulti" method="post" form-changed-multi>
                             <div class="d-flex align-items-start">
                                 <div class="form-group">
                                     <select name="type" class="form-control">
@@ -52,12 +52,12 @@
                         </form>
                     </div>
                     <div class="col-4">
-                        <a href='/admin/product/create' class="btn btn-outline-success">+Thêm Mới</a>
+                        <a href='/admin/article/create' class="btn btn-outline-success">+Thêm Mới</a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
     <table class="table table-hover" checkbox-multi>
         <thead>
             <tr>
@@ -67,14 +67,13 @@
                 <th>STT</th>
                 <th>Hình Ảnh</th>
                 <th>Tiêu Đề</th>
-                <th>Giá</th>
                 <th>Vị Trí</th>
                 <th>Trạng Thái</th>
                 <th>Hành Động</th>
             </tr>
         </thead>
         <tbody>
-                @foreach ($products as $item)
+                @foreach ($record as $item)
                     <tr>
                         <td>
                             <input type="checkbox" name="id" value={{$item->id}}>
@@ -84,7 +83,6 @@
                             <img src='{{$item->thumbnail}}', width="120px" height="auto">
                         </td>
                         <td>{{$item->title}}</td>
-                        <td>{{$item->price}}</td>
                         <td>
                             <input type="number" min="1" name="position" style="width:60px" value={{$item->posittion}}>
                         </td>
@@ -96,8 +94,8 @@
                             @endif
                         </td>
                         <td>
-                            <a class="btn btn-secondary btn-sm btn-detail" href="/admin/product/detail/{{$item->id}}">Chi Tiết</a>
-                            <a class="btn btn-warning btn-sm" href="/admin/product/edit/{{$item->id}}">Sửa</a>
+                            <a class="btn btn-secondary btn-sm btn-detail" href="/admin/article/detail/{{$item->id}}">Chi Tiết</a>
+                            <a class="btn btn-warning btn-sm" href="/admin/article/edit/{{$item->id}}">Sửa</a>
                             <button class="btn btn-danger btn-sm ml-1" button-delete data-id={{$item->id}}>Xóa</button>
                         </td>
                     </tr>
@@ -124,11 +122,11 @@
         </ul>
       </nav>
 
-      <form action="" id="formchangeStatus" method="POST" data-path ='/admin/product/ChangeStatus/'>
+      <form action="" id="formchangeStatus" method="POST" data-path='/admin/article/ChangeStatus/'>
         @csrf
         @method('Patch')
       </form>
-      <form action="" id="formDelete" method="POST" data-path ='/admin/product/delete/'>
+      <form action="" id="formDelete" method="POST" data-path ='/admin/article/delete/'>
         @csrf
         @method('Delete')
       </form>

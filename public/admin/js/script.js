@@ -129,7 +129,7 @@
 
 // End CheckBox Multi
 
-//ChangeMulti 
+//Form ChangeMulti 
 
     const formChangeMulti = document.querySelector("[form-changed-multi]");
     if (formChangeMulti) {
@@ -144,7 +144,7 @@
                     const id = input.value;
                     if (typeChange == "posittion") {
                         const posittion = input.closest('tr').querySelector("input[name='position']").value;
-                        arr.push(`${id}-${posittion}`);
+                        arr.push(`${id}/${posittion}`);
                     }else {
                         arr.push(id);
                     }
@@ -156,5 +156,46 @@
     }
 
 
-//End ChangeMulti
+//End Form ChangeMulti
  
+// Show Alert
+
+    const showalert =document.querySelector("[show-alert]");
+    if (showalert) {
+        const closeAlert =showalert.querySelector("[alert-close]");
+        closeAlert.addEventListener("click", () => {
+            showalert.classList.add('alert-hidden');
+        })
+        setTimeout(() => {
+            showalert.classList.add('alert-hidden');
+        },5000);
+    }
+
+//End Show Alert
+
+//PreView image Upload
+    const uploadsImage =  document.querySelector("[uploads-image]");
+    if (uploadsImage) {
+        const uploadImageInput = uploadsImage.querySelector("[uploads-image-input]");
+        const uploadImagePreview = uploadsImage.querySelector("[uploads-image-previews]");
+        const buttondelete = uploadsImage.querySelector("[button-delete-uploads]");
+        if ((uploadImageInput.value == "") && (uploadImagePreview.getAttribute("src") == "")) {
+            buttondelete.classList.add("button-hidden");    
+        }  
+        uploadImageInput.addEventListener("change", (e) => {
+            const [file] = e.target.files;
+            if (file) {
+                uploadImagePreview.src= URL.createObjectURL(file);
+                buttondelete.classList.remove("button-hidden");
+            }
+        })
+        buttondelete.addEventListener("click", () => {
+            uploadImageInput.value = "";
+            uploadImagePreview.src = ""; 
+            buttondelete.classList.add("button-hidden");
+        })
+    }
+
+
+
+//End PreView Image Upload

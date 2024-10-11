@@ -3,7 +3,7 @@
 
 @section('content')
     @include('admin/mixins/alert')
-    <form action="/admin/product/create" method="Post" enctype="multipart/form-data">
+    <form action="/admin/article/create" method="Post" enctype="multipart/form-data">
         <div class="card-body">
             <div class="form-group">
                 <label for="title">Tiêu Đề</label>
@@ -11,26 +11,18 @@
             </div>
             <div class="form-group">
                 <label for="parentID">Danh Mục</label>
-                <select name="category_id" class="form-control" id="parent_id">
+                <select name="categoryarticle_id" class="form-control" id="parent_id">
                     <option selected value="0">--Chọn Danh Mục--</option>
                      {!! App\Helpers\CategoryHelper::Menu($record) !!}
                 </select>
             </div>
             <div class="form-group">
-                <label for="content">Mô Tả</label>
+                <label for="content">Mô Tả Ngắn</label>
                 <textarea name="description" id="editor1" class="form-control" rows ="5"></textarea>
             </div>
             <div class="form-group">
-                <label for="price">Giá</label>
-                <input type="number" class="form-control" name='price' id="price" value="0" min="0">
-            </div>
-            <div class="form-group">
-                <label for="discountpercent">% Giảm Giá</label>
-                <input type="number" class="form-control" name='discountPercentage' id="discountpercent" value="0" min="0">
-            </div>
-            <div class="form-group">
-                <label for="stock">Số Lượng</label>
-                <input type="number" class="form-control" name='stock' id="stock" value="0" min="0">
+                <label for="content1">Nội Dung</label>
+                <textarea name="content" id="content1" class="form-control" rows ="5"></textarea>
             </div>
             <div class="form-group" uploads-image>
                 <label for="thumbnail">Ảnh</label>
