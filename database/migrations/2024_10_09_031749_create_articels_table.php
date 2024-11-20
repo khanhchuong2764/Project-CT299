@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('posittion');
             $table->string('thumbnail');
             $table->boolean('delete');
-            $table->dateTime('DeleteAt');
+            $table->time('DeleteAt')->nullable()->default(null);
             $table->timestamps();
         });
     }

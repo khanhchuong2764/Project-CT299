@@ -1,0 +1,56 @@
+.product__panel-link {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 400;
+    display: block;
+    margin-top: 1.5rem;
+    transition: 0.2s;
+	
+}
+.product__panel-item{
+    margin-bottom: 2rem;
+    padding: 0 0.75rem;
+    cursor: pointer;
+}
+
+.product__panel-link:hover{
+    color: var(--black-color);
+    text-decoration: none;
+}
+.nav-item:hover > .accordion-collapse {
+    display: block;
+    /* Hoặc dùng transition để mượt mà hơn */
+    transition: all 0.3s ease;
+}
+
+/* Ẩn các menu con mặc định */
+.nav-item .accordion-collapse {
+    display: none;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hiển thị và mở rộng menu con khi hover */
+.nav-item:hover .accordion-collapse {
+    display: block;
+    height: auto; /* Tự động điều chỉnh chiều cao */
+    opacity: 1;
+}
+
+/* Điều chỉnh chiều rộng của menu con */
+.nav-item .accordion-collapse .nav {
+    display: block;
+    width: 100%;
+}
+
+/* Điều chỉnh cho dấu ">" khi có menu con */
+.nav-item .nav-link i.feather-icon {
+    transition: transform 0.1s ease; /* Thêm hiệu ứng khi dấu > thay đổi */
+}
+
+.nav-item:hover .nav-link i.feather-icon {
+    transform: rotate(90deg); /* Dấu > quay khi menu mở */
+}

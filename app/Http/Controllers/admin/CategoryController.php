@@ -68,7 +68,8 @@ class CategoryController extends Controller
 
     public function create() {
         $find = [
-            'delete' => false
+            'delete' => false,
+            'status' => 'active'
         ];
         $record = CategoryProduct::where($find)->get();
         return view('admin/pages/category/create',[
@@ -106,17 +107,18 @@ class CategoryController extends Controller
     public function Delete(Request $request,string $id) {
         // dd("helo");   
         CategoryProduct::find($id)->update(['delete' => true,'DeleteAt' => date('Y-m-d H:i:s')]);
-        session()->flash('success', 'Đã Xóa Thành Công Sản Phẩm');
+        session()->flash('success', 'Đã Xóa Thành Công Danh Mục');
         return redirect()->back();
     }
 
     public function edit(Request $request,string $id) {   
         $record = CategoryProduct::find($id);
         $recordcategory = CategoryProduct::where('delete', false)
-                                     ->where('id', '!=', $record->id)
-                                     ->get();
+                                 ->where('id', '!=', $record->id)
+                                 ->where('status', 'active')
+                                 ->get();
         return view('admin.pages.category.edit',[
-            'titlePage' => 'Chỉnh Sửa Sản Phẩm',
+            'titlePage' => 'Chỉnh Sửa Danh Mục',
             'record' => $record, 
             'recordcategory' => $recordcategory
         ]);
@@ -129,7 +131,7 @@ class CategoryController extends Controller
         }
         $posittion = $request->input('posittion');
         $find = [
-            'delete' => false
+            'delete' => false,
         ];
         if ($posittion) {
             $posittion = (int)$posittion;
@@ -138,14 +140,14 @@ class CategoryController extends Controller
         }   
         $request['posittion'] = $posittion;
         CategoryProduct::find($id)->update($request->all());
-        session()->flash('success', 'Đã Cập Nhật Thành Công Sản Phẩm');
+        session()->flash('success', 'Đã Cập Nhật Thành Công Danh Mục');
         return redirect()->back();
     }
 
     public function detail(Request $request,string $id) {   
         $record = CategoryProduct::find($id);
         return view('admin.pages.category.detail',[
-            'titlePage' => 'Chi Tiết Sản Phẩm',
+            'titlePage' => 'Chi Tiết Danh Mục',
             'record' => $record
         ]);
     }
@@ -156,22 +158,22 @@ class CategoryController extends Controller
         switch ($type) {
             case 'active':
                 CategoryProduct::whereIn('id', $ids)->update(['status' => 'active']);
-                session()->flash('success', "Cập nhật trạng thái của " . count($ids) .  " sản phẩm thành công");
+                session()->flash('success', "Cập nhật trạng thái của " . count($ids) .  " danh mục thành công");
                 break;
             case 'inactive':
                 CategoryProduct::whereIn('id', $ids)->update(['status' => 'inactive']);
-                session()->flash('success', "Cập nhật trạng thái của " . count($ids) .  " sản phẩm thành công");
+                session()->flash('success', "Cập nhật trạng thái của " . count($ids) .  " danh mục thành công");
                 break;
             case 'delete':
                 CategoryProduct::whereIn('id', $ids)->update(['delete' => true,'DeleteAt' => date('Y-m-d H:i:s')]);
-                session()->flash('success', "Đã Xóa Thành Công " . count($ids) .  " Sản Phẩm");
+                session()->flash('success', "Đã Xóa Thành Công " . count($ids) .  " Danh Mục");
                 break;
             case 'posittion':
                 foreach ($ids as $key => $value) {
                     [$id,$posittion] = explode('/',$value); 
                     $posittion = (int)$posittion;
                     CategoryProduct::find($id)->update(['posittion' => $posittion]);
-                    session()->flash('success', 'Cập nhật Trạng Thái thành công');
+                    session()->flash('success', 'Đã cập nhật vị trí ' . count($ids) . " danh mục thành công" );
                 }
                 break;
         }

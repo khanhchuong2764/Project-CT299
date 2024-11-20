@@ -106,7 +106,35 @@
                 <p>Danh Mục</p>
               </a>
             </li>
+          </li><li class="nav-item">
+            <a href="/admin/unit/create" class="nav-link">
+              <p>Thêm Đơn Vị</p>
+            </a>
+          </li>
+            <li class="nav-item">
+              <a href="/admin/unit" class="nav-link">
+                <p>Danh Sách Đơn Vị</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/producers/create" class="nav-link">
+                <p>Thêm Nhà Sản Xuất</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/producers" class="nav-link">
+                <p>Danh Sách Nhà Sản Xuất</p>
+              </a>
+            </li>
           </ul>
+        </li>
+        <li class="nav-item">
+          <a href="/admin/account" class="nav-link">
+            <i class="nav-icon fa-brands fa-microsoft"></i>
+            <p class="nav-title">
+               Danh Sách Tài Khoản
+            </p>
+          </a>
         </li>
       </ul>
     </nav>

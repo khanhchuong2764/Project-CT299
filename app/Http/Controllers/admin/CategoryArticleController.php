@@ -58,7 +58,7 @@ class CategoryArticleController extends Controller
         $ObjectPagination['skip'] = (($ObjectPagination['currentPage'] - 1 ) * ($ObjectPagination['limitItemt']));
         $record = $productsQuery->skip($ObjectPagination['skip'])->take($ObjectPagination['limitItemt'])->orderBy('posittion', 'desc')->get()  ;
         return view('admin/pages/categoryArticle/index',[
-            'titlePage' => 'Danh Mục Sản Phẩm',
+            'titlePage' => 'Danh Mục Bài Viết',
             'record' => $record,
             'keyword' => $keyword,
             'FillterStatus' => $FillterStatus,
@@ -104,7 +104,7 @@ class CategoryArticleController extends Controller
 
     public function Delete(Request $request,string $id) {
         CategoryArticle::find($id)->update(['delete' => true,'DeleteAt' => date('Y-m-d H:i:s')]);
-        session()->flash('success', 'Đã Xóa Thành Công Sản Phẩm');
+        session()->flash('success', 'Đã Xóa Thành Công Danh Mục');
         return redirect()->back();
     }
 
@@ -113,10 +113,68 @@ class CategoryArticleController extends Controller
         $recordcategory = CategoryArticle::where('delete', false)
                                      ->where('id', '!=', $record->id)
                                      ->get();
-        return view('admin.pages.category.edit',[
-            'titlePage' => 'Chỉnh Sửa Sản Phẩm',
+        return view('admin.pages.categoryArticle.edit',[
+            'titlePage' => 'Chỉnh Sửa Danh Mục Bài Viết',
             'record' => $record, 
             'recordcategory' => $recordcategory
+        ]);
+    }
+
+    public function changeMulti(Request $request) { 
+        $ids = explode(',',$request->input('ids'));
+        $type = $request->input('type');
+        switch ($type) {
+            case 'active':
+                CategoryArticle::whereIn('id', $ids)->update(['status' => 'active']);
+                session()->flash('success', "Cập nhật trạng thái của " . count($ids) .  " danh mục thành công");
+                break;
+            case 'inactive':
+                CategoryArticle::whereIn('id', $ids)->update(['status' => 'inactive']);
+                session()->flash('success', "Cập nhật trạng thái của " . count($ids) .  " danh mục thành công");
+                break;
+            case 'delete':
+                CategoryArticle::whereIn('id', $ids)->update(['delete' => true,'DeleteAt' => date('Y-m-d H:i:s')]);
+                session()->flash('success', "Đã Xóa Thành Công " . count($ids) .  " Danh Mục");
+                break;
+            case 'posittion':
+                foreach ($ids as $key => $value) {
+                    [$id,$posittion] = explode('/',$value); 
+                    $posittion = (int)$posittion;
+                    CategoryArticle::find($id)->update(['posittion' => $posittion]);
+                    session()->flash('success', 'Đã cập nhật vị trí ' . count($ids) . " danh mục thành công" );
+                }
+                break;  
+        }
+        return redirect()->back();
+    }
+
+
+    public function editPatch(Request $request ,string $id) {   
+        if ($request->file('file')) {
+            $uploadedFileUrl = cloudinary()->upload($request->file('file')->getRealPath())->getSecurePath();
+            $request['thumbnail']= $uploadedFileUrl;
+        }
+        $posittion = $request->input('posittion');
+        $find = [
+            'delete' => false,
+        ];
+        if ($posittion) {
+            $posittion = (int)$posittion;
+        }else {
+            $posittion =CategoryArticle::where($find)->count() + 1;   
+        }   
+        $request['posittion'] = $posittion;
+        CategoryArticle::find($id)->update($request->all());
+        session()->flash('success', 'Đã Cập Nhật Thành Công Danh Mục');
+        return redirect()->back();
+    }
+
+
+    public function detail(Request $request,string $id) {   
+        $record = CategoryArticle::find($id);
+        return view('admin.pages.categoryArticle.detail',[
+            'titlePage' => 'Chi Tiết Danh Mục Bài Viết',
+            'record' => $record
         ]);
     }
 }

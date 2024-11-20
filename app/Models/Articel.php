@@ -15,4 +15,8 @@ class Articel extends Model
     protected $attributes = [
         'delete' => false
     ];
+    public function category() {
+        return $this->belongsTo('App\Models\CategoryArticle','categoryarticle_id','id');
+    }
+    
 }

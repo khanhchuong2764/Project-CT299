@@ -18,9 +18,9 @@ return new class extends Migration
             $table->text('description');
             $table->string('status');
             $table->integer('posittion');
-            $table->string('thumbnail');
+            $table->string('thumbnail')->nullable()->default(null);
             $table->boolean('delete');
-            $table->time('DeleteAt');
+            $table->timestamp('deleteAt')->nullable()->default(null);
             $table->timestamps();
         });
     }

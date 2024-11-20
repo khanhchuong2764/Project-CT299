@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductValidate;
 use App\Models\Product;
 use App\Models\CategoryProduct;
+use App\Models\producer;
+use App\Models\unit;
 use Dotenv\Util\Regex;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
@@ -98,9 +100,13 @@ class ProductController extends Controller
             'delete' => false
         ];
         $record = CategoryProduct::where($find)->get(); 
+        $producers = producer::all()->sortDesc(); 
+        $units = unit::all()->sortDesc(); 
         return view('admin.pages.product.create',[
             'titlePage' => 'Thêm Mới Sản Phẩm',
-            'record' => $record
+            'record' => $record,
+            'producers' => $producers,
+            'units' => $units 
         ]);
     }
 
@@ -120,6 +126,7 @@ class ProductController extends Controller
         }
         $request['posittion'] = $posittion;
         Product::create($request->all());
+        session()->flash('success', 'Tạo Sản Phẩm Thành Công');
         return redirect("/admin/product");
     }
 
@@ -163,7 +170,6 @@ class ProductController extends Controller
     }
 
     public function Delete(Request $request,string $id) {
-        // dd("helo");   
         Product::find($id)->update(
             [
                 'delete' => true,
@@ -174,11 +180,17 @@ class ProductController extends Controller
         return redirect()->back();
     }
 
-    public function edit(Request $request,string $id) {   
+    public function edit(Request $request,string $id) { 
+        $producers = producer::all()->sortDesc(); 
+        $units = unit::all()->sortDesc();   
+        $category = CategoryProduct::where('delete', false)->get(); 
         $record = Product::find($id);
         return view('admin.pages.product.edit',[
             'titlePage' => 'Chỉnh Sửa Sản Phẩm',
-            'record' => $record
+            'record' => $record,
+            'producers' => $producers,
+            'units' => $units ,
+            'category' => $category 
         ]);
     }
     public function editPatch(ProductValidate $request ,string $id) {   

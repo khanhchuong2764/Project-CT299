@@ -6,7 +6,7 @@
 
 @if (Session::has('error'))
     <div class="alert alert-danger" show-alert>
-        {{Session::get('success')}} <i class="fa-solid fa-xmark closedalert" alert-close></i>
+        {{Session::get('error')}} <i class="fa-solid fa-xmark closedalert" alert-close></i>
     </div>
 @endif
 

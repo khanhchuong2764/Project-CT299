@@ -1,0 +1,69 @@
+[show-alert] {
+    position: fixed;
+    top:55px;
+    right: 15px;
+    z-index: 999;
+}
+[show-alert].alert-hidden {
+    display: none;
+}
+ .closedalert {
+    font-size: 15px;
+    margin-left: 10px;
+    width: 25px;
+    display: inline-block;
+    padding: 10px;
+}
+.closedalert:hover {
+    cursor: pointer;
+}
+.show-alert {
+    font-size: 20px;
+}
+
+/* End Show */
+
+
+.breadcrumb {
+    background-color: #f8f9fa; /* Màu nền nhẹ cho breadcrumb */
+    border-radius: 5px; /* Bo tròn các góc */
+    padding: 10px; /* Khoảng cách bên trong cho breadcrumb */
+}
+
+.breadcrumb-item a {
+    color: #007bff; /* Màu sắc cho liên kết */
+    text-decoration: none; /* Bỏ gạch chân cho liên kết */
+}
+
+.breadcrumb-item a:hover {
+    color: #0056b3; /* Màu sắc khi hover vào liên kết */
+    text-decoration: underline; /* Gạch chân khi hover */
+}
+
+
+
+
+
+.category-container {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép xuống dòng nếu có nhiều nút */
+    gap: 10px; /* Khoảng cách giữa các nút */
+}
+
+.category-item {
+    padding: 8px 16px; /* Khoảng cách trong nút */
+    border: 1px solid #ddd; /* Viền màu nhạt */
+    border-radius: 20px; /* Bo tròn các góc */
+    font-size: 1rem; /* Kích thước chữ */
+    color: #333; /* Màu chữ */
+    background-color: #fff; /* Màu nền trắng */
+    text-align: center; /* Căn giữa văn bản */
+    cursor: pointer; /* Con trỏ thay đổi khi di chuột vào */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng khi hover */
+}
+
+.category-item:hover {
+    background-color: #f0f0f0; /* Màu nền khi hover */
+    color: #007bff; /* Màu chữ khi hover */
+    border-color: #007bff; /* Viền đổi màu khi hover */
+}

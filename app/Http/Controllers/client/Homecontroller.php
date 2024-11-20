@@ -5,6 +5,7 @@ namespace App\Http\Controllers\client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\CategoryProduct;
 
 class Homecontroller extends Controller
 {
@@ -13,10 +14,16 @@ class Homecontroller extends Controller
             'delete' => false,
             'status' => 'active'
         ];
-        $product = Product::where($find)->get();
-        return view('client/pages/home/index',[
-            'TitlePage' => 'Trang Chủ',
-            'product' => $product
+        $products = Product::where($find)->orderBy('posittion', 'desc')->get();
+        
+        $records = $products->map(function ($product) {
+            $product->final_price =ceil($product->price *(1 - $product->discountPercentage / 100));
+            return $product;
+        });
+        return view('client/pages/home/index', [
+            'titlePage' => 'Trang Chủ',
+            'record' => $records,
         ]);
+        
     }
 }

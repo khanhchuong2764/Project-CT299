@@ -1,5 +1,6 @@
 //FillterStatus
     const buttonStatus = document.querySelectorAll("[button-status]");
+    console.log(buttonStatus);
     if (buttonStatus.length > 0) {
         let url = new URL(window.location.href);
         buttonStatus.forEach(button => {
@@ -149,9 +150,11 @@
                         arr.push(id);
                     }
                 })
+                inputform.value=arr.join(",");
+                formChangeMulti.submit();
+            }else {
+                confirm('Vui lòng chọn ít nhất 1 sản phẩm');
             }
-            inputform.value=arr.join(",");
-            formChangeMulti.submit();
         })
     }
 
